@@ -1,4 +1,6 @@
 <h1> Enter your text
 <form method=post action=@{MirrorR}>
     <input type=text name=content>
+    <text> + </text>
+    <input type=text name=content2>
     <input type=submit>

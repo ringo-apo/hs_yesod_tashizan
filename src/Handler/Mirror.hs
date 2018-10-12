@@ -4,12 +4,24 @@
 module Handler.Mirror where
 
 import Import
-import qualified Data.Text as T
+import Data.Text (Text)
+import Prelude hiding (getLine, putStrLn)
+import Data.Text
+
+conv :: Text -> Int
+conv text = read $ Data.Text.unpack text
 
 getMirrorR :: Handler Html
 getMirrorR = defaultLayout $(widgetFile "mirror")
 
 postMirrorR :: Handler Html
 postMirrorR =  do
-        postedText <- runInputPost $ ireq textField "content"
+        t1 <- runInputPost $ ireq textField "content"
+        let ai = conv t1
+
+        bs <- runInputPost $ ireq textField "content2"
+        let bi = conv bs
+
+        let ci = ai + bi
+        let postedText = ci
         defaultLayout $(widgetFile "posted")
